@@ -1,0 +1,62 @@
+{
+  "id": "/groundcontrol",
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 256,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "fernandosanchez/appstudio:groundcontrol",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 0,
+          "servicePort": 10101,
+          "protocol": "tcp",
+          "name": "groundcontrol90",
+          "labels": {
+            "VIP_0": "/groundcontrol:80"
+          }
+        },
+        {
+          "containerPort": 443,
+          "hostPort": 0,
+          "servicePort": 10105,
+          "protocol": "tcp",
+          "name": "groundcontrol443",
+          "labels": {
+            "VIP_1": "/groundcontrol:443"
+          }
+        },
+        {
+          "containerPort": 5500,
+          "hostPort": 0,
+          "servicePort": 10106,
+          "protocol": "tcp",
+          "name": "groundcontrol5500",
+          "labels": {
+            "VIP_2": "/groundcontrol:5500"
+          }
+        }
+      ],
+      "privileged": false,
+      "forcePullImage": true
+    }
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 2,
+      "protocol": "MESOS_HTTP",
+      "delaySeconds": 15
+    }
+  ],
+  "requirePorts": false,
+  "labels": {
+    "HAPROXY_GROUP": "external"
+  }
+}
