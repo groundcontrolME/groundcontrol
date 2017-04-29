@@ -1,0 +1,135 @@
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta name="viewport" content="width = device-width">
+    <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link id="linkApple1" rel="apple-touch-icon" />
+    <link id="linkApple2" rel="apple-touch-icon-precomposed" />
+    <link id="linkIpad" rel="apple-touch-icon" sizes="72x72" />
+    <link id="linkApple3" rel="apple-touch-icon" sizes="114x114" />
+    <link id="linkAndroid" rel="apple-touch-icon" sizes="128x128" />
+    <!-- <link rel="apple-touch-startup-image" href="ath/imgs/iphone-startup-page.png"/> -->
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />  
+    <meta name="mobile-web-app-capable" content="yes"/>    
+    <meta class="metatitle" name="mobile-web-app-title">
+    <meta class="metatitle"name="apple-mobile-web-app-title">
+    <!-- <link rel="apple-touch-icon-precomposed" href="ath/imgs/icon-152x152-precomposed.png"> -->
+    
+
+           <!-- Startup images -->
+
+<!-- iOS 6 & 7 iPad (retina, portrait) -->
+<link id="linkBg1" 
+      media="(device-width: 768px) and (device-height: 1024px)
+         and (orientation: portrait)
+         and (-webkit-device-pixel-ratio: 2)"
+      rel="apple-touch-startup-image">
+
+<!-- iOS 6 & 7 iPad (retina, landscape) -->
+<link id="linkBg2" 
+      media="(device-width: 768px) and (device-height: 1024px)
+         and (orientation: landscape)
+         and (-webkit-device-pixel-ratio: 2)"
+      rel="apple-touch-startup-image">
+
+<!-- iOS 6 iPad (portrait) -->
+<link id="linkBg3" 
+      media="(device-width: 768px) and (device-height: 1024px)
+         and (orientation: portrait)
+         and (-webkit-device-pixel-ratio: 1)"
+      rel="apple-touch-startup-image">
+
+<!-- iOS 6 iPad (landscape) -->
+<link id="linkBg4" 
+      media="(device-width: 768px) and (device-height: 1024px)
+         and (orientation: landscape)
+         and (-webkit-device-pixel-ratio: 1)"
+      rel="apple-touch-startup-image">
+
+<!-- iOS 6 & 7 iPhone 5 -->
+<link id="linkBg5" 
+      media="(device-width: 320px) and (device-height: 568px)
+         and (-webkit-device-pixel-ratio: 2)"
+      rel="apple-touch-startup-image">
+
+<!-- iOS 6 & 7 iPhone (retina) -->
+<link id="linkBg6" 
+      media="(device-width: 320px) and (device-height: 480px)
+         and (-webkit-device-pixel-ratio: 2)"
+      rel="apple-touch-startup-image">
+
+<!-- iOS 6 iPhone -->
+<link id="linkBg7" href=""
+      media="(device-width: 320px) and (device-height: 480px)
+         and (-webkit-device-pixel-ratio: 1)"
+      rel="apple-touch-startup-image">
+	<title>camTOme</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+	<form id="userInfoTab" enctype="multipart/form-data">
+	    <div class="infoUserLocal">
+	    	<label id="fotoTitulo">¿Quieres subir una foto?</label>
+	    	<label class="imgUp"><input type="file" name="imguser" id="imguser" /></label>
+	    </div>
+	</form>
+	<script>
+		$(document).ready(function(){
+			setCamera();
+			$('#imguser').click();
+		});
+		function setCamera() {
+			var fileExtension = "";
+		    $('#imguser').change(function(){
+		        //obtenemos un array con los datos del archivo
+		        var file = $("#imguser")[0].files[0];
+		        //obtenemos el nombre del archivo
+		        var fileName = file.name;
+		        //obtenemos la extensión del archivo
+		        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+		        $('#ext').val(fileExtension)
+		        //obtenemos el tamaño del archivo
+		        var fileSize = file.size;
+		        //obtenemos el tipo de archivo image/png ejemplo
+		        var fileType = file.type;
+		        //mensaje con la información del archivo
+		        var formData = new FormData($("#userInfoTab")[0]);
+		        var message = "";    
+		        $(this).css('display','none');
+		        $('.imgUp').append('<center><img src="img/preload.gif" width="32" /></center>')
+		        $.ajax({
+		            url: 'api/upload.php',  
+		            type: 'POST',
+		            data: formData,
+		            cache: false,
+		            contentType: false,
+		            processData: false,
+		            beforeSend: function(){
+		                
+		            },
+		            //una vez finalizado correctamente
+		            success: function(data){
+		                if(isImage(fileExtension))
+		                {
+		                 
+		                }
+		                $('#imguser').css('display','block');
+		                alert("foto enviada!")
+		            },
+		            //si ha ocurrido un error
+		            error: function(){
+		                  alert('error!!!')
+		            }
+		        });
+		    })  
+		}
+	</script>
+</body>
+</html>

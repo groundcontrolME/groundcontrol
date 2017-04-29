@@ -1,0 +1,581 @@
+@import url(//fonts.googleapis.com/css?family=Raleway:100,200,300,500,700);
+html, body{
+  margin: 0 !important;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  /*overflow: hidden;*/
+  font-family:'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  background-color: #eee;
+  line-height: 22px;
+  -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  /*-webkit-user-select: none; */
+}
+body{
+  -webkit-text-size-adjust: none;
+}
+body *{
+  font-family:'Raleway', sans-serif;
+  font-weight: 300;
+  text-shadow: none !important;
+}
+.containerAll{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#conectarComo{width:80% !important;  position: relative; margin: 0 auto;}
+													             /*CABECERA:; */
+#header {
+	position: fixed;
+	top:0px;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 10000;
+	overflow: hidden;
+	-webkit-transition: height 0.3s;
+	-moz-transition: height 0.3s;
+	transition: height 0.3s;
+}
+
+											           	/*CUERPO (CONTENIDO CENTRAL):*/
+
+/*contenedor principal (chats, cabecera y mapas):;*/
+
+.snap-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  overflow: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, .95);
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+       -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.snap-content > * {
+  -webkit-transform: translateZ(0px);
+          transform: translateZ(0px);
+}
+
+/* contenedor chats */
+.contentText {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.85);
+  overflow-y: auto;
+  -webkit-transition-property: top, bottom;
+          transition-property: top, bottom;
+  -webkit-transition-duration: .2s, .2s;
+          transition-duration: .2s, .2s;
+  -webkit-transition-timing-function: linear, linear;
+          transition-timing-function: linear, linear;
+  -webkit-overflow-scrolling: touch;
+/*  padding-bottom: 10%;*/
+  max-height: 90%;
+
+}
+/* mismo contenedor chats (con props diferentes cuando chat se activa)*/
+.content_active{
+  right: 0;
+  bottom: 0;
+}
+
+/*contenedor de mensajes de chats:*/
+.main{
+	padding: 20px;
+	padding-top: 50px;
+	background-color: #ccc;
+	display: none;
+}
+
+/*guías transparentes para abrir los sidebars con el dedo:*/
+.transparent{
+	position: fixed;
+	top: 0px;
+	left: 0;
+	width: 20px;
+	min-height: 1000px;
+	background: #ff0;
+	z-index: 100000000000000;
+}
+.transparent_right{
+	position: fixed;
+	top: 0px;
+	right: 0;
+	width: 20px;
+	min-height: 1000px;
+	background: #ff0;
+	z-index: 100000000000000;
+}
+
+
+/*contenedor de mapa y cabecera de mapa:*/
+.mapa{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+													                 /*SIDEBARS*/
+
+
+/*sidebars (menús laterales):*/
+.snap-drawers{
+	display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+.snap-drawers,.list{
+	/*background-color: #ccc;*/
+	background: ##111514;
+	background-image: url("../img/bg/ZenBG-1.png"), url("../img/bg/ZenBG-2.png");
+	background-repeat: repeat-x, repeat;
+}
+.snap-drawer {
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: auto;
+  width: 265px;
+  height: auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: width 0.3s ease;
+     -moz-transition: width 0.3s ease;
+      -ms-transition: width 0.3s ease;
+       -o-transition: width 0.3s ease;
+          transition: width 0.3s ease;
+}
+
+.snap-drawer-left {
+  left: 0;
+  z-index: 1;
+}
+
+.snap-drawer-right {
+  right: 0;
+  z-index: 1;
+}
+
+.snapjs-left .snap-drawer-right,
+.snapjs-right .snap-drawer-left {
+  display: none;
+}
+
+.snapjs-expand-left .snap-drawer-left,
+.snapjs-expand-right .snap-drawer-right {
+  width: 100%;
+}
+.snap-drawer-right{
+  left: 60px;
+  width: auto;
+}
+
+/* Slide animation */
+.content.slide {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+ -webkit-transition: -webkit-transform .25s ease-in-out;
+         transition:         transform .25s ease-in-out;
+}
+.content.slide.left {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+.content.slide.right {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+/*lista sidebars derecha:*/
+
+.list {
+  margin-bottom: 10px;
+  list-style: none;
+  left: 0px;
+  background-color: #fff;
+  padding: 0px;
+  padding-left: 0px;
+  margin-top: 40px;
+}
+
+.list li {
+
+  position: relative;
+  padding: 20px 60px 20px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, .85);
+  cursor: pointer;
+}
+.list li:hover{
+  background-color: rgba(0,0,0,0.5);
+}
+.list li .btn {
+  position: absolute;
+  right: -20px;
+  /* float: right; */
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  top: 11px;
+}
+.list li .closeBtn{
+  left: 15px;
+  margin-top: 0px;
+}
+.list li .linkBtn{
+  left: 35px;
+  margin-top: 0px;
+}
+.list li .bloqueoBtn{
+  left: 15px;
+  margin-top: 0px;
+}
+.nombreLista{
+  color: #fff;
+  margin-left: 20px;
+}
+
+.chat .nombreLista{
+  color:#00ff06;
+}
+.distancia{
+  float: right;
+  color: #eee;
+  font-size: 16px;
+  margin-right:-25px;
+}
+.listRight .items{
+    position: relative;
+    float: right;
+    right:10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 25px;
+    box-shadow: 0 0 5px #000;
+    border: 3px solid rgba(255, 255, 255, .65);
+    text-align: center;
+    background: #ff00ff;
+}
+
+.listRight .items .msgsNumber2{
+    position: relative;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    top: -3px;
+ }
+
+
+/*título sidebar derecha (Chats):;*/
+.titulo{
+  position:absolute;
+  width: 95%;
+  margin-right: 10px;
+  /*background-color: #f00; */
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.btnFilter{
+  cursor: pointer;
+}
+.btnFilter:hover{
+  cursor: pointer;
+  color:#00ff06;
+}
+.btnFilter_users{
+  float: left;
+  margin-left: 20px;
+}
+.btnFilter_chats{
+
+}
+.btnFilter_favorites{
+  float: right;
+}
+.btnFilter_update{
+  float: right;
+}
+.btnFilter_active{
+  color:#00ff06;
+}
+.usersIcon{
+  position: absolute;
+  /*left: 50%;*/
+  width: 25px;
+  height: 25px;
+  margin-left: -26px;
+  background-color: #f0f;
+  background: url('../img/usuario.svg') no-repeat top left;
+  background-size: 100% 100%;
+  margin-top: -3px;
+}
+.chatIcon{
+  position: absolute;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  margin-left: -26px;
+  background-color: #f0f;
+  background: url('../img/sugerencia.svg') no-repeat top left;
+  background-size: 100% 100%;
+  margin-top: -3px;
+}
+.chatMsg:last-child{margin-bottom:40px;}															           /*FOOTER */
+
+/*caja de abajo con campo de texto y botón para enviar mensajes:*/
+#footer-box-bg {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left:0px;
+  /*height: auto;*/
+  height: 0px;
+  background: -webkit-linear-gradient(#D9D9D9, #F0F0F0); /* For Safari */
+  background: -o-linear-gradient(#D9D9D9, #F0F0F0); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#D9D9D9, #F0F0F0); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#D9D9D9, #F0F0F0); /* Standard syntax */
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 999;
+  overflow: hidden;
+}
+#footer-box {
+  position: fixed;
+  width: 100%;
+  bottom: -100px;
+  left:0px;
+  /*height: auto;*/
+  height: 40px;
+  background: -webkit-linear-gradient(#D9D9D9, #F0F0F0); /* For Safari */
+  background: -o-linear-gradient(#D9D9D9, #F0F0F0); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#D9D9D9, #F0F0F0); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#D9D9D9, #F0F0F0); /* Standard syntax */
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.emoticonosLista{
+  position: relative;
+  width: 100%;
+  /*padding: 10px;*/
+  /*background-color: #f0f;*/
+  height: 200px;
+}
+/*campo de texto para enviar mensajes:*/
+.chat_text {
+    background: none repeat scroll 0 0 #CCCCCC;
+    border: 0 none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 20px;
+    max-height: 50px;
+    min-height: 25px;
+    overflow: auto;
+    vertical-align: bottom;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 0.3em;
+    font-size:14px;
+
+}
+
+/*botón para enviar mensajes de chat:*/
+.btnsChat{
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  line-height: 30px;
+  cursor: pointer;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(#555, #222); /* For Safari */
+    background: -o-linear-gradient(#555, #222); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#555, #222); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#555, #222); /* Standard syntax */
+}
+.chat_envia{
+
+}
+.btnsChat:hover{
+  	background: -webkit-linear-gradient(#222, #555); /* For Safari */
+  	background: -o-linear-gradient(#222, #555); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#222, #555); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#222, #555); /* Standard syntax */
+}
+.cursiva{
+  color: #fff;
+  font-size: 10px;
+  font-style: italic;
+}
+/* FORMULARIOS */
+.formulario{
+  position: absolute;
+  width: 100%;
+
+}
+.formulario form{background: none !important; border-radius: none !important; box-shadow: none !important; max-width: 90%; margin: 0 auto;}
+.formulario form div.mitad{width:45%; display: inline-block;}
+.formulario form div.mitad label, .formulario form div.mitad select{display: inline-block; margin:0.3em;}
+.formulario form div.mitad label{vertical-align: 15px; }
+.formulario form label{margin: 0.8em 0;}
+
+ form input[type=submit]{margin:3em 0;}
+
+.infoUserLocal{
+  color: #fff; width: 90%; position: relative; margin: 0 auto;
+  margin-top: -30px
+}
+.infoUserLocal img{
+  margin-left: 15px;
+}
+.infoUserLocal label#nick{vertical-align: 25px;}
+.infoUserLocal div.img{float:left; width: 40px; height: 40px; border-radius: 30px; background: #ccc; color: #000; margin-right: 5px;}
+
+.infoUserLocal .imgusermuestra{width:45px; height:45px; float:left; margin-right: 10px; background-size:cover !important; border-radius: 25px; margin-top: -14px; }
+.negro{
+  color: #000;
+  font-style: italic;
+}
+.emoticono{
+  /*font-family:'Raleway', sans-serif;*/
+  font-size: 30px;
+  height: 26px;
+  padding-top:2px;
+  padding-bottom:2px;
+  font-weight: 100;
+  background: url(../img/cara2.svg) no-repeat center center, linear-gradient(#555, #222);
+}
+.emoticono:hover{
+  background: url(../img/cara2.svg) no-repeat center center, linear-gradient(#222, #555);
+}
+.fotochat{
+  font-size: 30px;
+  height: 26px;
+  padding-top:2px;
+  padding-bottom:2px;
+  font-weight: 100;
+  background: url(../img/foto.svg) no-repeat center center, linear-gradient(#555, #222);
+}
+.fotochat:hover{
+  background: url(../img/foto.svg) no-repeat center center, linear-gradient(#222, #555);
+}
+.emotFoto{
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      padding: 5px;
+      width: 35px;
+      height: 35px;
+      background-color: #ddd;
+}
+
+.trama{width:100%; height: 100%; position: fixed; left: 0px; top: 0px; z-index: 10000000000; background-color: rgba(0, 0, 0,0.75); opacity: 0.5; display: none;}
+.buttons{width:80%; text-align: center; height: auto; min-height: 20px; padding: 0.3em 1em; position: fixed; left: 10%; border-radius: 5px; top: 20%; z-index: 10000000001; background-color: rgba(0, 0, 0,0.85); display: none; box-shadow: 0px 0px 4px #000; box-sizing:border-box; -webkit-box-sizing: border-box;}
+.buttons a{width:80% !important; position: relative !important;margin: 1em auto !important; padding: 0.5em !important; color: #fff; font-size: 18px; text-decoration: none; background: -webkit-linear-gradient(top, #ccc 0%, #000 99%, -moz-linear-gradient(top, #ccc 0%, #000 99% !important; text-align: center !important;}
+.buttons a:hover{
+    color:#38c;
+}
+.buttons a div:hover{
+    color:#38c;
+}
+.buttons a div{width:80% ; position: relative ; margin: 1em auto ; padding: 0.5em ; color: #fff; font-size: 18px; text-decoration: none; background: -webkit-linear-gradient(top, #ccc 0%, #000 99%, -moz-linear-gradient(top, #ccc 0%, #000 99% ; text-align: center ;}
+.picture_chat{
+
+  width: 100%;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000000001;
+  background-color: rgba(0, 0, 0,0.75);
+  box-shadow: rgb(0, 0, 0) 0px 0px 4px;
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+  height: 100%;
+  min-height: 400px;
+  /*background-image: url(//localhost/amapoint/v3/api/files/L7ehYTMSsNDPdCEYseer.jpg);*/
+  background-position: 50% 50%;
+  background-repeat: no-repeat no-repeat;
+  background-size: contain;
+}
+
+.picture_chat span{
+    position: absolute;
+    width: 100%;
+    font-size: 50px;
+    left: 0px;
+    color: #fff;
+    bottom: 20px;
+}
+
+
+.logoBlanco{
+    position: relative;
+    width: 200px;
+    height: 58px;
+    background: url(../img/amapoint_blanco.png) no-repeat center center;
+    background-size: 40% 40%;
+}
+
+.btnTrama{
+    position: relative;
+    width: auto;
+    height: 30px;
+    padding: 5px;
+    background-color: #ff0;
+}
+.tituloCaja{
+  position: relative;
+  width: auto;
+  height: 40px;
+  background-color: #f00;
+  text-align: center;
+  padding: 5px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.fontGr{
+  font-size: 16px;
+
+}
+
+
+
+
