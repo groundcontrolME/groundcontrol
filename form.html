@@ -1,0 +1,334 @@
+<html>
+<head>
+	<title></title>
+	
+</head>
+<body>
+    <style type="text/css">
+        body *{
+            -webkit-transform: translate3d(0, 0, 0);
+             -moz-transform: translate3d(0, 0, 0);
+              -ms-transform: translate3d(0, 0, 0);
+               -o-transform: translate3d(0, 0, 0);
+                  transform: translate3d(0, 0, 0);
+        }
+        .logoBlanco{
+            position: relative;
+            width: 240px;
+            height: 70px;
+            margin-left: -2px;
+            background: url(img/amapoint_blanco.png) no-repeat center center;
+            background-size: 100% 100%;
+        }
+        .linea_separacion{
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            margin-bottom: 20px;
+        }
+        .appIns{
+            position: relative;
+            display: block;
+            text-align: center;
+            width: 100%;
+            height: 60px;
+            background-color: #444;
+            overflow: hidden;
+            font-size: 12px;
+            color: #fff;
+            border-radius: 8px;
+            /*-webkit-overflow-scrolling: touch;*/
+
+          -webkit-transition: height 0.5s ease;
+             -moz-transition: height 0.5s ease;
+              -ms-transition: height 0.5s ease;
+               -o-transition: height 0.5s ease;
+                  transition: height 0.5s ease;
+
+                  -webkit-overflow-scrolling: touch;
+          -webkit-transform: translate3d(0, 0, 0);
+             -moz-transform: translate3d(0, 0, 0);
+              -ms-transform: translate3d(0, 0, 0);
+               -o-transform: translate3d(0, 0, 0);
+                  transform: translate3d(0, 0, 0);
+        }
+        .appInsTxts{
+            position: relative;
+            display: block;
+            width: 90%;
+            padding: 5%;
+            /*height: 120px;*/
+        }
+        .btnIcon{
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 15px;
+            margin-left: 20px;
+            margin-right: 20px;
+            width: 72px;
+            height: 72px;
+            box-shadow: 0px 0px 10px #000;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: none .5s ease;
+            transition: all .5s ease;
+        }
+        .btnIcon:hover{
+            color: #ff0;
+            box-shadow: 0px 0px 20px #000;
+            background-size: 70%;
+        }
+        .activado{
+            cursor: auto;
+            color: #ff0;
+            box-shadow: 0px 0px 20px #000;
+            background-size: 70%;   
+        }
+        #icon1{
+            background-image: url(ath/imgs/touch-icon-ipad.png);
+            background-color: #000;
+        }
+        #icon2{
+            background-image: url(ath/imgs2/touch-icon-ipad.png);
+            background-color: #00537f;
+        }
+        .txt{
+            position: relative;
+            font-family: Arial;
+            top: 80px;
+        }
+        .flecha_abajo{
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 22px;
+            background: url(img/flecha_abajo.png) no-repeat top center;
+        }
+        .cursiva{
+            line-height: 0px !important;
+        }
+        .icons{
+            position: relative;
+            /*top: -10px;*/
+        }
+        .subtituloIcon{
+            font-weight: bold;
+        }
+        .pq{
+            font-size: 12px;
+        }
+        .iconsBloque{
+            position: relative;
+            display: block;
+        }
+    </style>
+<form id="userInfoTab" enctype="multipart/form-data">
+    <div class="infoUserLocal">
+      <input type="hidden" name="idUser" value=""  id="idUser" />
+      <input type="hidden" name="ext" value=""  id="ext" />
+      <!-- <img class="logoBlanco" src="img/amapoint_blanco.png"><br><br> -->
+      <div class="logoBlanco"></div><br>
+      <div class="imgusermuestra" style="background: url(img/icons/dot0007.png) no-repeat left top;"></div>
+    <label id="nickMuestra" class=""></label><br/>
+    <label id="sexo">Soy: <b></b></label>
+    <label id="preferencias">Busco: <b></b></label>
+    <label for="level_control">Mi temperatura:</label>
+    <input name="level_control" id="level_control" class="level_control" value="50" min="0" max="100" step="1" data-highlight="true" type="range">
+    <br/>
+    <label id="fotoTitulo">¿Quieres subir una foto?</label>
+    <label class="imgUp"><input type="file" name="imguser" id="imguser" /></label>
+    <br/>
+    <span class="linea_separacion"></span>
+    <span class="appIns">
+        <div class="appInsTxts">
+            <div class="iconsBloque">
+                <label>Instala amapoint en tu móvil</label>
+                <span id="icono_flecha_abajo" class="flecha_abajo"></span>
+            </div>
+            <span class="subtituloIcon">Elige icono y nombre de la app:</span>
+            <span class="cursiva pq">Personalízalos para que la app pase desapercibida en tu escritorio móvil.</span>
+        </div>
+        <div class="icons">
+            <div class="btnIcon" id="icon1" param-number="1" param-active="true">
+              <div class="txt">amapoint</div>
+            </div>
+            <div class="btnIcon" id="icon2" param-number="2" param-active="false">
+              <div class="txt">reloj</div>
+            </div>
+        </div>
+    </span>
+    <br />
+    <span class="linea_separacion"></span>
+    <input type="button" value="desconectar" data-theme="b" class="disconect">
+    </div>
+
+</form>
+<script type="text/javascript">
+
+	function setLevel(level,update) {
+		// $('#level_control').attr('value',level);
+        $('#level_control').val(level);
+        $('.ui-slider-bg').css('width',level+'%');
+        $('.ui-slider-handle').css('left',level+'%');
+
+	   	temperaturaNueva=true;
+	}
+	
+	function initForm (data) {
+        initIconsFunctionality();
+		$('#level_control').change(function(){
+             temperaturaNueva=true;
+            ga('send', 'event', 'cambia_temperatura', 'slide_sidebar_izq', nombreLocal+'-'+$('#level_control').val()+'-'+idLocal);
+        });
+
+		setLevel(temperatura,false);
+    $('.imgusermuestra').css({'background-image': 'url(img/icons/'+sexo+'.png)' }) 
+		document.getElementById('nickMuestra').innerHTML=nombreLocal;
+        document.getElementById('idUser').value = idLocal;
+                if(localStorage.getItem("imgUser")){
+                    // $('.imgusermuestra').remove();
+                    $('.imgusermuestra').css('background', 'url(api/files/'+localStorage.getItem("imgUser")+') no-repeat left top');
+                    // $('.infoUserLocal').prepend('<div class="imgusermuestra" style="background: url(api/files/'+localStorage.getItem("imgUser")+') no-repeat left top;"></div>');
+                    $('#fotoTitulo').html('Mi foto:');
+                    imgUser  = localStorage.getItem("imgUser");
+                }
+                $('#nickMuestra').html(nombreLocal);
+                var pref  = (preferencia === 'm')? 'Mujer' : 'Hombre' ;
+                var sex  = (sexo === 'm')? 'Mujer' : 'Hombre' ;
+                $('#preferencias b').html(pref);
+                $('#sexo b').html(sex);
+                activaDisconnect();
+                
+	  
+    var fileExtension = "";
+    $('#imguser').change(function(){
+        //obtenemos un array con los datos del archivo
+        var file = $("#imguser")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        $('#ext').val(fileExtension)
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        //mensaje con la información del archivo
+        var formData = new FormData($("#userInfoTab")[0]);
+        var message = "";    
+        $(this).css('display','none');
+        $('.imgUp').append('<center><img src="img/preload.gif" width="32" /></center>')
+        $.ajax({
+            url: 'api/upload.php',  
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function(){
+                
+            },
+            //una vez finalizado correctamente
+            success: function(data){
+                ga('send', 'event', 'sube_imagen', 'click', data);
+                if(isImage(fileExtension))
+                {
+                  // $('.imgusermuestra').remove();
+                  if (window.localStorage) {
+                        localStorage.setItem("imgUser", data);
+                        imgUser  = localStorage.getItem("imgUser");
+		          }
+                  $('.imgusermuestra').css('background', 'url(api/files/'+data+') no-repeat left top');
+                  // $('.infoUserLocal').prepend('<div class="imgusermuestra" style="background: url(api/files/'+data+') no-repeat left top;"></div>')
+                }
+                $('#imguser').css('display','block');
+                $('#fotoTitulo').html('Mi foto:');
+                $('.imgUp center').remove();
+    
+            },
+            //si ha ocurrido un error
+            error: function(){
+                 ga('send', 'event', 'sube_imagen', 'click', 'Error_en_subida');
+                  console.log('error!!!')
+            }
+        });
+    })  
+    
+  }
+
+  function isImage(extension)
+{
+    switch(extension.toLowerCase())
+    {
+        case 'jpg': case 'gif': case 'png': case 'jpeg':
+            return true;
+        break;
+        default:
+            return false;
+        break;
+    }
+}
+
+/**
+ * desconecta
+ */
+function activaDisconnect(){
+    $('.disconect').on('click', function(){
+        ga('send', 'event', 'desconecta', 'click',localStorage.getItem("nick")+'-'+idLocal);
+        // localStorage.removeItem("nick");
+        // localStorage.removeItem("temperatura");
+        // localStorage.removeItem("edad");
+        // localStorage.removeItem("soy");
+        // localStorage.removeItem("busco");
+        // localStorage.removeItem("id");
+        // localStorage.removeItem("imgUser");
+        removeLocalStorage();
+        myWindow = window.open("http://www.amapoint.com/web", "_self", "width=200, height=100");
+    })
+}
+
+/////////// ICONS
+
+function setIcon(id) {
+    var el=$('#icon'+id);
+    var titulo=el.find('.txt').html();
+    var carpetaId=(id>1)?id:'';
+
+    activaBtn($('.btnIcon'),false);
+    activaBtn(el,true);
+    document.title = titulo;
+
+    document.getElementById('linkAndroid').href='ath/imgs'+carpetaId+'/touch-icon-android.png';
+    document.getElementById('linkApple1').href='ath/imgs'+carpetaId+'/touch-icon-iphone4.png';
+    document.getElementById('linkApple2').href='ath/imgs'+carpetaId+'/touch-icon-iphone4.png';
+    document.getElementById('linkApple3').href='ath/imgs'+carpetaId+'/touch-icon-iphone4.png';
+    document.getElementById('linkIpad').href='ath/imgs'+carpetaId+'/touch-icon-ipad.png';
+    document.getElementById('linkBg1').href='ath/imgs'+carpetaId+'/1536x2008.jpg';
+    document.getElementById('linkBg2').href='ath/imgs'+carpetaId+'/1496x2048.jpg';
+    document.getElementById('linkBg3').href='ath/imgs'+carpetaId+'/768x1004.jpg';
+    document.getElementById('linkBg4').href='ath/imgs'+carpetaId+'/748x1024.jpg';
+    document.getElementById('linkBg5').href='ath/imgs'+carpetaId+'/640x1096.jpg';
+    document.getElementById('linkBg6').href='ath/imgs'+carpetaId+'/640x920.jpg';
+    document.getElementById('linkBg7').href='ath/imgs'+carpetaId+'/320x460.jpg';
+    $('.metatitle').attr('content',titulo);
+}
+function activaBtn (el,activa) {
+    if (activa) {
+        el.addClass('activado');
+    }else{
+        el.removeClass('activado')
+        if (el.hasClass('activado')) {
+        };
+    }
+}
+</script>
+</body>
+</html>
