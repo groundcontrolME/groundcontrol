@@ -51,6 +51,7 @@
       "timeoutSeconds": 20,
       "maxConsecutiveFailures": 3,
       "portIndex": 2,
+      "path": "/",
       "protocol": "MESOS_HTTP",
       "delaySeconds": 15
     }
