@@ -4,9 +4,11 @@
 var fs =    require('fs');
 
 var options = {
-    key:    fs.readFileSync('/usr/local/apache2/conf/servidor.key'),
-    cert:   fs.readFileSync('/usr/local/apache2/conf/servidor.crt')
-    // ,    ca:     fs.readFileSync('ssl/ca.crt')
+    key:    fs.readFileSync('/usr/local/groundcontrol/cert/privkey.pem'),
+    cert:   fs.readFileSync('/usr/local/groundcontrol/cert/fullchain.pem'),
+    ca:     fs.readFileSync('/usr/local/groundcontrol/cert/chain.pem')
+    // key:    fs.readFileSync('/usr/local/groundcontrol/cert/servidor.key'),
+    // cert:   fs.readFileSync('/usr/local/groundcontrol/cert/servidor.crt')
 };
 
 var server = require('https').createServer(options);
@@ -60,7 +62,7 @@ function onConnection(socket){
 
 
 
-
+    console.log("Hola guapo.");
 
     var id=socket.id;
     usuariosOriginalIds.push(socket.id);
