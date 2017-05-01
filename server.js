@@ -4,19 +4,30 @@
 var fs =    require('fs');
 
 var options = {
-    key:    fs.readFileSync('/usr/local/groundcontrol/cert/privkey.pem'),
-    cert:   fs.readFileSync('/usr/local/groundcontrol/cert/fullchain.pem'),
-    ca:     fs.readFileSync('/usr/local/groundcontrol/cert/chain.pem')
+    key:    fs.readFileSync('cert/privkey.pem'),
+    cert:   fs.readFileSync('cert/fullchain.pem'),
+    ca:     fs.readFileSync('cert/chain.pem')
     // key:    fs.readFileSync('/usr/local/groundcontrol/cert/servidor.key'),
     // cert:   fs.readFileSync('/usr/local/groundcontrol/cert/servidor.crt')
 };
 
-var server = require('https').createServer(options);
-servidor = require('socket.io').listen(server);     //socket.io server listens to https connections
+//create HTTPS server
+var https = require('https')
+var httpsServer = https.createServer(options); //could link an express app here-->  createServer(options,app)
+console.log('Hola! voy a arrancar');
+serverPort = 5500
+httpsServer.listen(serverPort, function(){
+      console.log('server up and running at %s port', serverPort);
+});
+console.log('Hola! He arrancado');
+
+//link Sockets.io
+var ioServer = require('socket.io');
+var io = new ioServer();    
+//socket.io server listens to https connections
+io.attach(httpsServer);
 //servidor.set('heartbeat timeout', 30000);
 //servidor.set('heartbeat interval', 10000);
-server.listen(5500);
-
 
 var usuariosOriginalIds= new Array();
 var usuarios= new Array();
@@ -25,7 +36,6 @@ var stackMsgs=new Array();
 var stackIds=new Array();
 var stackIdsToDesencadenarse=new Array();
 var stackDataToDesencadenarse=new Array();
-servidor.sockets.on("connection", onConnection);
 
 
 
@@ -41,8 +51,9 @@ function inventario(){
 //setInterval(inventario,10000);
 //inventario();
 
-
-function onConnection(socket){
+//define what to do when listening
+io.sockets.on("connection", function(socket){ 
+//function onConnection(socket){
 //    console.log(socket.id);
     // NUEVO USUARIO CONECTADO:
     // Agregamos usuarios a los arrays (2 arrays: 'usuarios' solo con ids para obtener rápido índices, y luego usuariosData)
@@ -60,9 +71,7 @@ function onConnection(socket){
 //    usuarioData.lng=socket.manager.handshaken[socket.id].query.lng;
 //      usuariosData.push(usuarioData);
 
-
-
-    console.log("Hola guapo.");
+    console.log("Hola!. Acabo de recibir tu conexion.");
 
     var id=socket.id;
     usuariosOriginalIds.push(socket.id);
@@ -79,16 +88,12 @@ function onConnection(socket){
     usuariosData.push(usuarioData);
 
 
-
-
-
-
-
     // ESCUCHAMOS EVENTOS NUEVO USUARIO
     // cambio de posición:
     socket.on('position', function (data) {
           // Emitimos nueva posición a todos
           servidor.sockets.emit("broadcastPosition", data);
+          //FER: aqui es donde actualizamos la posicion en el backend
     });
      // cambio de estado:
     socket.on('estado', function (data) {
@@ -225,4 +230,5 @@ function onConnection(socket){
         stackDataToDesencadenarse.splice(indexStackToDesencadenarse,1);
     };
     socket.emit('tuid', id);
-}
+} );
+
