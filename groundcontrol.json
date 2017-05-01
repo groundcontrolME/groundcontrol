@@ -44,20 +44,9 @@
       "forcePullImage": true
     }
   },
-  "healthChecks": [
-    {
-      "gracePeriodSeconds": 300,
-      "intervalSeconds": 60,
-      "timeoutSeconds": 20,
-      "maxConsecutiveFailures": 3,
-      "portIndex": 2,
-      "path": "/",
-      "protocol": "MESOS_HTTP",
-      "delaySeconds": 15
-    }
-  ],
   "requirePorts": false,
   "labels": {
-    "HAPROXY_GROUP": "external"
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_VHOST": "client.groundcontrol.me"
   }
 }
